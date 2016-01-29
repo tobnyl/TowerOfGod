@@ -6,9 +6,9 @@ public class GameManager : MonoBehaviour {
 
 	// public statics
 	public static GameManager Instance;
-	public static float HighestPoint = 0;
-	public static float HighestX = 0;
-	public static float LowestX = 0;
+	public float HighestPoint = 0;
+	public float HighestX = 0;
+	public float LowestX = 0;
 
 	// privates
 	private const float UPDATE_LATENCY = 0.1f;
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
 		StopCoroutine(updateBoundariesRoutine);
 	}
 
-	private static IEnumerator _UpdateBoundaries(){
+	private IEnumerator _UpdateBoundaries(){
 		while (true) {
 
 			float highY = 0;
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
 			for (int i = 0; i < Block.AllBlocks.Count; i++) {
 				PolygonCollider2D pColl = Block.AllBlocks[i].GetComponent<PolygonCollider2D>();
 				for (int o = 0; o < pColl.points.Length; o++) {
-					Vector2 v = pColl.points[i] + pColl.transform.position;
+					Vector2 v = pColl.points[i] + (Vector2)(pColl.transform.position);
 					if (v.y > highY) {
 						highY = v.y;
 					}
@@ -69,8 +69,7 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 		
-		HighestPoint = highY;
-		return HighestPoint;
+		return highY;
 	}
 	public static float GetHighestX(){
 		float highX = 0;
@@ -84,8 +83,7 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 		
-		HighestX = highX;
-		return HighestX;
+		return highX;
 	}
 	public static float GetLowestX(){
 		float lowX = 0;
@@ -99,7 +97,6 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 		
-		LowestX = lowX;
-		return LowestX;
+		return lowX;
 	}
 }
