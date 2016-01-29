@@ -22,24 +22,25 @@ public class GrabBlock : MonoBehaviour
 		mousePos = Input.mousePosition;
 		mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		Debug.DrawRay(ray.origin, ray.direction * 10, Color.cyan);
+		Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+//		Debug.DrawRay(ray.origin, ray.direction * 10, Color.cyan);
 
-		RaycastHit hit;
+		RaycastHit2D hit;
 		if (Input.GetMouseButton(0))
 		{
 			if(spawnedPrefab != null){
 				
-				spawnedPrefab.transform.position = Vector2.Lerp(transform.position, mousePos, 1000f);
+				spawnedPrefab.transform.position = Vector2.Lerp(transform.position, mousePos, 100000000f);
 			}
 
 		}
 		if (Input.GetMouseButtonDown(0))
 		{
-			if(Physics.Raycast(ray, out hit) == true)
+			hit = Physics2D.Raycast(new Vector2(worldPoint.x, worldPoint.y), Vector3.forward, Mathf.Infinity);
+			if(hit != null)
 			{
-				Debug.DrawRay (ray.origin, ray.direction * hit.distance, Color.red);
-				Debug.Log ("Ray hit a " + hit.transform.gameObject.name);
+//				Debug.DrawRay (ray.origin, ray.direction * hit.distance, Color.red);
+//				Debug.Log ("Ray hit a " + hit.transform.gameObject.name);
 				spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
 				hit.transform.parent = spawnedPrefab.transform;
 				grabbedBlock = hit.transform.gameObject;
