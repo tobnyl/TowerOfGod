@@ -45,23 +45,25 @@ public class CameraMovement : MonoBehaviour
         if (cameraPosition.y - _viewPortWorldSize.y / 2f < 0)
         {
             cameraPosition.y = _viewPortWorldSize.y/2f;
+            Debug.Log("Lowest point...");
         }
         else if (cameraPosition.y > towerTopPositionY)
         {
             cameraPosition.y = towerTopPositionY;
+            Debug.Log("Highest point...");
         }
 
         // Horizontal
-	    var towerLeftBlock = TowerLeftBlock.transform.position;
-	    var towerRightBlock = TowerRightBlock.transform.position;
+	    var towerLeftBlock = GameManager.GetLowestX();
+	    var towerRightBlock = GameManager.GetHighestX();
 
-        if (cameraPosition.x < towerLeftBlock.x)
+        if (cameraPosition.x < towerLeftBlock)
         {
-            cameraPosition.x = towerLeftBlock.x;
+            cameraPosition.x = towerLeftBlock;
         }
-        else if (cameraPosition.x > towerRightBlock.x)
+        else if (cameraPosition.x > towerRightBlock)
         {
-            cameraPosition.x = towerRightBlock.x;
+            cameraPosition.x = towerRightBlock;
         }
 
 
