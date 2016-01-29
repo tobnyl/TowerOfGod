@@ -36,15 +36,18 @@ public class CameraMovement : MonoBehaviour
         Vector3 targetMoveAmount = moveDir * Speed;
         _moveAmount = Vector3.SmoothDamp(_moveAmount, targetMoveAmount, ref _smoothMoveVelocity, SmoothTime);
 
-        Camera.main.transform.position += _moveAmount;
+        cameraPosition += _moveAmount;
 
-        if (Camera.main.transform.position.y - viewPortWorldSize.y / 2f < 0)
+        if (cameraPosition.y - viewPortWorldSize.y / 2f < 0)
         {
-            Debug.Log("Camera.y < 0");
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, viewPortWorldSize.y / 2f, Camera.main.transform.position.z);
+            cameraPosition.y = viewPortWorldSize.y/2f;
+        }
+        else if (cameraPosition.y > TowerTop.transform.position.y)
+        {
+            cameraPosition.y = TowerTop.transform.position.y;
         }
 
 
-        //Camera.main.transform.position = cameraPosition;
+        Camera.main.transform.position = cameraPosition;
     }
 }
