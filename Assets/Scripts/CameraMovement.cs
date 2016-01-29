@@ -40,13 +40,15 @@ public class CameraMovement : MonoBehaviour
         cameraPosition += _moveAmount;
 
         // Vertical
+	    var towerTopPositionY = GameManager.GetHighestPoint();
+
         if (cameraPosition.y - _viewPortWorldSize.y / 2f < 0)
         {
             cameraPosition.y = _viewPortWorldSize.y/2f;
         }
-        else if (cameraPosition.y > TowerTop.transform.position.y)
+        else if (cameraPosition.y > towerTopPositionY)
         {
-            cameraPosition.y = TowerTop.transform.position.y;
+            cameraPosition.y = towerTopPositionY;
         }
 
         // Horizontal
