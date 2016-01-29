@@ -4,6 +4,9 @@ using System.Collections;
 public class GrabBlock : MonoBehaviour 
 {
 //	private RaycastHit hit;
+	Rigidbody2D rbc;
+//	Rigidbody2D rbp;
+	HingeJoint2D hinge;
 	private Vector2 mousePos;
 	public GameObject mousePointPrefab;
 	public GameObject spawnedPrefab;
@@ -30,7 +33,7 @@ public class GrabBlock : MonoBehaviour
 		{
 			if(spawnedPrefab != null){
 				
-				spawnedPrefab.transform.position = Vector2.Lerp(transform.position, mousePos, 100000000f);
+				spawnedPrefab.transform.position = mousePos;
 			}
 
 		}
@@ -42,8 +45,19 @@ public class GrabBlock : MonoBehaviour
 //				Debug.DrawRay (ray.origin, ray.direction * hit.distance, Color.red);
 //				Debug.Log ("Ray hit a " + hit.transform.gameObject.name);
 				spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
+				hinge = spawnedPrefab.GetComponent<HingeJoint2D>();
 				hit.transform.parent = spawnedPrefab.transform;
 				grabbedBlock = hit.transform.gameObject;
+				rbc = grabbedBlock.GetComponent<Rigidbody2D>();
+				hinge.connectedBody = rbc;
+				hinge.connectedAnchor = spawnedPrefab.transform.position - grabbedBlock.transform.position;
+				Debug.Log(hinge.connectedBody);
+				Debug.Log (hinge.connectedAnchor);
+
+
+//				rbp = spawnedPrefab.GetComponent<Rigidbody2D>();
+//				SwitchRigidbodyToParent ();
+
 			}
 		}
 
@@ -55,4 +69,13 @@ public class GrabBlock : MonoBehaviour
 			}
 		}
 	}
+//	public void SwitchRigidbodyToParent(){
+//		rbp.mass = rbc.mass;
+//		rbp.gravityScale = rbc.gravityScale;
+//		rbp.angularDrag = rbc.angularDrag;
+//		rbc.mass = 0f;
+//		rbc.gravityScale = 0f;
+//		rbc.angularDrag = 0f;
+//		rbp.isKinematic = true;
+//	}
 }
