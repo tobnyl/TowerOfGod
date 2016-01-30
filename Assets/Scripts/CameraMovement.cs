@@ -67,6 +67,8 @@ public class CameraMovement : MonoBehaviour
             cameraPosition.y += _moveAmount.y;
         }
 
+	    cameraPosition.y = Mathf.Clamp(cameraPosition.y, _viewPortWorldSize.y / 2f, Mathf.Max(_viewPortWorldSize.y/2f, towerTopPositionY));
+
 	    // Horizontal
 	    var towerLeftBlock = GameManager.GetLowestX();
 	    var towerRightBlock = GameManager.GetHighestX();
