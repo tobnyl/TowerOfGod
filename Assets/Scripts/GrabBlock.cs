@@ -67,6 +67,7 @@ public class GrabBlock : MonoBehaviour
 				joint.enabled = false; // this fixing a major bug (I guess we won't need it anyway?)
 				block.interactable = false;
 				block.inPlay = true;
+				GrabbedBlock.tag = "Block";
 				GrabbedBlock.transform.parent = null;
 				GrabbedBlock = null;
 				SpawnBlock.instance.BlockSpawn ();
@@ -84,5 +85,8 @@ public class GrabBlock : MonoBehaviour
 			GrabbedBlock.transform.position = mainSpawnPoint.transform.position;
 
 		}
+	}
+	public void clearUsedBlocks(){
+		usedBlocks = 0;
 	}
 }
