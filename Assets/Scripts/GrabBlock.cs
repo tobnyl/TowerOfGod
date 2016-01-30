@@ -6,7 +6,7 @@ public class GrabBlock : MonoBehaviour
 //	private RaycastHit hit;
 	Rigidbody2D rbc;
 //	Rigidbody2D rbp;
-	HingeJoint2D hinge;
+	SpringJoint2D joint;
 	private Vector2 mousePos;
 	public GameObject mousePointPrefab;
 	public GameObject spawnedPrefab;
@@ -22,8 +22,7 @@ public class GrabBlock : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{ 
-		mousePos = Input.mousePosition;
-		mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+		mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 //		Debug.DrawRay(ray.origin, ray.direction * 10, Color.cyan);
@@ -40,19 +39,19 @@ public class GrabBlock : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			hit = Physics2D.Raycast(new Vector2(worldPoint.x, worldPoint.y), Vector3.forward, Mathf.Infinity);
-			if(hit != null)
+			if(hit.transform != null)
 			{
 //				Debug.DrawRay (ray.origin, ray.direction * hit.distance, Color.red);
 //				Debug.Log ("Ray hit a " + hit.transform.gameObject.name);
 				spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
-				hinge = spawnedPrefab.GetComponent<HingeJoint2D>();
-				hit.transform.parent = spawnedPrefab.transform;
+				joint = spawnedPrefab.GetComponent<SpringJoint2D>();
+				//hit.transform.parent = spawnedPrefab.transform;
 				grabbedBlock = hit.transform.gameObject;
 				rbc = grabbedBlock.GetComponent<Rigidbody2D>();
-				hinge.connectedBody = rbc;
-				hinge.connectedAnchor = spawnedPrefab.transform.position - grabbedBlock.transform.position;
-				Debug.Log(hinge.connectedBody);
-				Debug.Log (hinge.connectedAnchor);
+				joint.connectedBody = rbc;
+				joint.connectedAnchor = spawnedPrefab.transform.position - grabbedBlock.transform.position;
+				Debug.Log(joint.connectedBody);
+				Debug.Log (joint.connectedAnchor);
 
 
 //				rbp = spawnedPrefab.GetComponent<Rigidbody2D>();
@@ -65,6 +64,7 @@ public class GrabBlock : MonoBehaviour
 		{
 			if(spawnedPrefab != null){
 				grabbedBlock.transform.parent = null;
+				grabbedBlock = null;
 				Destroy (spawnedPrefab.gameObject);
 			}
 		}
