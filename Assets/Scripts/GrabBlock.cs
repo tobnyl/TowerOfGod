@@ -40,21 +40,22 @@ public class GrabBlock : MonoBehaviour
 			hit = Physics2D.Raycast(new Vector2(worldPoint.x, worldPoint.y), Vector3.forward, Mathf.Infinity);
 			if(hit.transform != null)
 			{
-				block = hit.transform.gameObject.GetComponent<Block>();
-				if (block.interactable){
-				spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
-				joint = spawnedPrefab.GetComponent<SpringJoint2D>();
-				GrabbedBlock = hit.transform.gameObject;
-				coll = GrabbedBlock.GetComponent<Collider2D> ();
-				coll.isTrigger = false;
-				GrabbedBlock.layer = 0;
-				grabbedRB = GrabbedBlock.GetComponent<Rigidbody2D>();
-				grabbedRB.isKinematic = false;
-				grabbedRB.gravityScale = 0;
-				joint.connectedBody = grabbedRB;
-				joint.connectedAnchor = spawnedPrefab.transform.position - GrabbedBlock.transform.position;
+				block = hit.transform.GetComponent<Block>();
+				if (block != null) {
+					if (block.interactable){
+						spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
+						joint = spawnedPrefab.GetComponent<SpringJoint2D>();
+						GrabbedBlock = hit.transform.gameObject;
+						coll = GrabbedBlock.GetComponent<Collider2D> ();
+						coll.isTrigger = false;
+						GrabbedBlock.layer = 0;
+						grabbedRB = GrabbedBlock.GetComponent<Rigidbody2D>();
+						grabbedRB.isKinematic = false;
+						grabbedRB.gravityScale = 0;
+						joint.connectedBody = grabbedRB;
+						joint.connectedAnchor = spawnedPrefab.transform.position - GrabbedBlock.transform.position;
+					}
 				}
-
 			}
 		}
 
