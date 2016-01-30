@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     public GameObject TowerRightBlock;
     public float Speed = 5f;
     public float SmoothTime = 0.15f;
+	public float TwrTopThreshold;
 
     private Vector3 _moveAmount;
     private Vector3 _smoothMoveVelocity;
@@ -43,7 +44,7 @@ public class CameraMovement : MonoBehaviour
 		var towerTopPositionY = GameManager.GetHighestPoint();
         Debug.Log("Towertop: " + towerTopPositionY);
 
-	    if (towerTopPositionY > 9)
+		if (towerTopPositionY > TwrTopThreshold)
 	    {
 	        var tempMoveY = cameraPosition.y += _moveAmount.y;
 
