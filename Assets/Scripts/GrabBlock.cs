@@ -9,10 +9,12 @@ public class GrabBlock : MonoBehaviour
 	public GameObject mousePointPrefab;
 	public GameObject spawnedPrefab;
 	public GameObject prefabChild;
+	public GameObject mainSpawnPoint;
 	public static GameObject GrabbedBlock;
 	public float HoldForce = 1;
 	private Rigidbody2D grabbedRB;
 	private Collider2D coll;
+	public bool inSpawn;
 
 
 	void FixedUpdate(){
@@ -59,18 +61,27 @@ public class GrabBlock : MonoBehaviour
 			}
 		}
 
-		if (Input.GetMouseButtonUp (0))
-		{
-			if(spawnedPrefab != null){
+		if (Input.GetMouseButtonUp (0) && !inSpawn) {
+			if (spawnedPrefab != null) {
 				joint.enabled = false; // this fixing a major bug (I guess we won't need it anyway?)
-
 				block.interactable = false;
 				block.inPlay = true;
 				GrabbedBlock.transform.parent = null;
 				GrabbedBlock = null;
-				SpawnBlock.instance.BlockSpawn();
+				SpawnBlock.instance.BlockSpawn ();
 				Destroy (spawnedPrefab.gameObject);
 			}
+		} 
+		if (Input.GetMouseButtonUp (0) && inSpawn) {
+			coll.isTrigger = true;
+			GrabbedBlock.layer = 7;
+			grabbedRB.isKinematic = true;
+			Destroy (spawnedPrefab.gameObject);
+			joint.anchor = new Vector2(0f,0f);
+			joint.connectedBody = null;
+			GrabbedBlock.transform.rotation = Quaternion.identity;
+			GrabbedBlock.transform.position = mainSpawnPoint.transform.position;
+
 		}
 	}
 }
