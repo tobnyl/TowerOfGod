@@ -29,6 +29,8 @@ public class Block : MonoBehaviour {
        
         if (otherBlock != null) 
         {
+			// do add more sounds!
+
             if (gameObject.tag == "Block" && otherBlock.tag == "Block" &&  c.relativeVelocity.magnitude > GameManager.Instance.DestroyBlockThreshold)
             {
                 var offsetIncrement = transform.lossyScale/2f;
