@@ -9,6 +9,7 @@ public class Block : MonoBehaviour {
 	public float SpawnAngle = 0;
     public GameObject ExplosionPrefab;
     public AudioClip ExplosionClip;
+    public AudioClip StackClip;
 
 	// publics
 	public bool interactable = false;
@@ -38,21 +39,37 @@ public class Block : MonoBehaviour {
                 var startPosition = transform.position - offsetIncrement;
                 var offset = Vector3.zero;
 
-                var volume = 1.0f;
+                AudioManager.Instance.AddAudioClipToQueue(ExplosionClip);
+                //AudioManager.Instance.Play(ExplosionClip, 0.2f, 0.2f, 1, 1);
 
                 for (int i = 0; i < numExplosions; i++)
                 {                    
                     var explosion = Instantiate(ExplosionPrefab, startPosition + offset, Quaternion.identity);
-                    AudioManager.Instance.Play(ExplosionClip, volume, volume, 0.95f, 1.05f);
                     Destroy(explosion, 1.0f);
-
-                    volume -= 0.33333f;
 
                     offset += offsetIncrement;
                 }
 
                 Destroy(c.gameObject);
+            }
+            else
+            {
+                PlayStackSoundEffect(c);
             }     
         }
+        else
+        {
+            PlayStackSoundEffect(c);
+        }
+    }
+
+    private void PlayStackSoundEffect(Collision2D c)
+    {
+        var vol = 0.05f;// Mathf.Max(0.05f, Mathf.Abs(c.relativeVelocity.normalized.y) / 15f);
+        Debug.Log(vol);
+
+        AudioManager.Instance.AddAudioClipToQueue(StackClip);
+
+        //AudioManager.Instance.Play(StackClip, 0.01f, 0.05f, 1.0f, 1.0f);
     }
 }
