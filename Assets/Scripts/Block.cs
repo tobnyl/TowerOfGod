@@ -8,6 +8,8 @@ public class Block : MonoBehaviour {
 	public bool inPlay;
 	public float SpawnAngle = 0;
     public GameObject ExplosionPrefab;
+    public AudioClip ExplosionClip;
+    public AudioClip StackClip;
 
 	// publics
 	public bool interactable = false;
@@ -28,15 +30,46 @@ public class Block : MonoBehaviour {
        
         if (otherBlock != null) 
         {
-            Debug.Log(c.relativeVelocity.magnitude);
+			// do add more sounds!
+
             if (gameObject.tag == "Block" && otherBlock.tag == "Block" &&  c.relativeVelocity.magnitude > GameManager.Instance.DestroyBlockThreshold)
             {
-                var explosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
-                Destroy(explosion, 1.0f);
+                var offsetIncrement = transform.lossyScale/2f;
+                var numExplosions = 3;
+                var startPosition = transform.position - offsetIncrement;
+                var offset = Vector3.zero;
 
+                //AudioManager.Instance.AddAudioClipToQueue(ExplosionClip);
+                AudioManager.Instance.Play(ExplosionClip, 0.001f, 0.01f, 0.99f, 1.01f);
+
+                for (int i = 0; i < numExplosions; i++)
+                {                    
+                    var explosion = Instantiate(ExplosionPrefab, startPosition + offset, Quaternion.identity);
+                    Destroy(explosion, 1.0f);
+
+                    offset += offsetIncrement;
+                }
 
                 Destroy(c.gameObject);
+            }
+            else
+            {
+                PlayStackSoundEffect(c);
             }     
         }
+        else
+        {
+            PlayStackSoundEffect(c);
+        }
+    }
+
+    private void PlayStackSoundEffect(Collision2D c)
+    {
+        var vol = Mathf.Max(0.05f, Mathf.Abs(c.relativeVelocity.normalized.y) / 15f);
+        Debug.Log(vol);
+
+        //AudioManager.Instance.AddAudioClipToQueue(StackClip);
+
+        AudioManager.Instance.Play(StackClip, 0.01f, 0.05f, 1.0f, 1.0f);
     }
 }
