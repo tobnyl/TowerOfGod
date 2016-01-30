@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class SpawnBlock : MonoBehaviour {
-	TestBlockScript TBS;
+	Block blockScript;
 	public GameObject[] blockList;
 	public GameObject nextSpawnPoint;
 	public GameObject currentSpawnPoint;
@@ -27,8 +27,8 @@ public class SpawnBlock : MonoBehaviour {
 	public void BlockSpawn(){
 		if (currentBlock != null) {
 			currentBlock.transform.position = currentSpawnPoint.transform.position;
-			TBS = currentBlock.GetComponent<TestBlockScript>();
-			TBS.interactable = true;
+			blockScript = currentBlock.GetComponent<Block>();
+			blockScript.interactable = true;
 		}
 		bx = Random.Range (0, blockList.Length);
 		nextBlockPrefab = blockList [bx];

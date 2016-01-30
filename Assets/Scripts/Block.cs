@@ -7,7 +7,7 @@ public class Block : MonoBehaviour {
 	public static List<Block> AllBlocks = new List<Block>();
 
 	// publics
-	public bool Interactible = false;
+	public bool interactable = false;
 
 
 	void OnEnable(){
