@@ -33,15 +33,13 @@ public class CameraMovement : MonoBehaviour
 
         var moveDir = new Vector3(
             Input.GetAxisRaw("Horizontal"),
-            Input.GetAxis("Mouse ScrollWheel"),
+            Input.GetAxis("Vertical"),
 	        0).normalized;
 
 	    moveDir.y *= ScrollSensitivity;
 
         Vector3 targetMoveAmount = moveDir * Speed;
         _moveAmount = Vector3.SmoothDamp(_moveAmount, targetMoveAmount, ref _smoothMoveVelocity, SmoothTime);
-
-        
 
         // Vertical
 		var towerTopPositionY = GameManager.GetHighestPoint();
