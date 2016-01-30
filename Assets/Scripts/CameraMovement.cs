@@ -41,12 +41,11 @@ public class CameraMovement : MonoBehaviour
 
         // Vertical
 		var towerTopPositionY = GameManager.GetHighestPoint();
+        Debug.Log("Towertop: " + towerTopPositionY);
 
 	    if (towerTopPositionY > 9)
 	    {
 	        var tempMoveY = cameraPosition.y += _moveAmount.y;
-
-            
 
             Debug.Log("Yes");
 
