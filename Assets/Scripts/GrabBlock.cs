@@ -22,11 +22,6 @@ public class GrabBlock : MonoBehaviour
 		{
 			if(spawnedPrefab != null){
 				spawnedPrefab.transform.position = mousePos;
-
-				if (grabbedRB != null) {
-					//grabbedRB.velocity = spawnedPrefab.GetComponent<Rigidbody2D>().velocity;
-					//grabbedRB.velocity = (Vector2)(spawnedPrefab.transform.position - GrabbedBlock.transform.position) * HoldForce;
-				}
 			}
 		}
 	}
@@ -46,9 +41,15 @@ public class GrabBlock : MonoBehaviour
 				block = hit.transform.GetComponent<Block>();
 				if (block != null) {
 					if (block.interactable){
-						block.transform.localScale = Vector3.one;
 
 						spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
+
+						Vector2 dist =  hit.point - (Vector2)block.transform.position;
+						dist /= SpawnBlock.SpawnSize;
+						block.transform.position = hit.point - dist;
+						block.transform.localScale = Vector3.one;
+
+						
 						GrabbedBlock = hit.transform.gameObject;
 						joint = GrabbedBlock.GetComponent<SpringJoint2D>();
 						coll = GrabbedBlock.GetComponent<Collider2D> ();
@@ -57,7 +58,7 @@ public class GrabBlock : MonoBehaviour
 						grabbedRB = GrabbedBlock.GetComponent<Rigidbody2D>();
 						grabbedRB.isKinematic = false;
 						joint.connectedBody = spawnedPrefab.GetComponent<Rigidbody2D>();
-						joint.anchor = spawnedPrefab.transform.position - GrabbedBlock.transform.position;
+						joint.anchor = GrabbedBlock.transform.InverseTransformPoint(spawnedPrefab.transform.position);
 					}
 				}
 			}
@@ -87,6 +88,7 @@ public class GrabBlock : MonoBehaviour
 			joint.anchor = new Vector2(0f,0f);
 			joint.connectedBody = null;
 			GrabbedBlock.transform.eulerAngles = new Vector3(0, 0, GrabbedBlock.GetComponent<Block>().SpawnAngle);
+			GrabbedBlock.transform.rotation = Quaternion.identity;
 			GrabbedBlock.transform.position = mainSpawnPoint.transform.position;
 
 		}
