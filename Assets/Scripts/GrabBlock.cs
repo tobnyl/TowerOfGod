@@ -63,6 +63,7 @@ public class GrabBlock : MonoBehaviour
 				grabbedRB.gravityScale = 1;
 				GrabbedBlock.transform.parent = null;
 				GrabbedBlock = null;
+				SpawnBlock.instance.BlockSpawn();
 				Destroy (spawnedPrefab.gameObject);
 			}
 		}

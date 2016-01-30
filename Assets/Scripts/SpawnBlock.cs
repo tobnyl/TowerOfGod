@@ -3,11 +3,13 @@ using System.Collections;
 
 public class SpawnBlock : MonoBehaviour {
 	Block blockScript;
+	public static SpawnBlock instance;
 	public GameObject[] blockList;
 	public GameObject nextSpawnPoint;
 	public GameObject currentSpawnPoint;
 	public GameObject nextBlockPrefab;
 	public GameObject currentBlock;
+	public GameObject cam;
 	public int bx;
 	public int nextBlock;
 
@@ -15,6 +17,9 @@ public class SpawnBlock : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		BlockSpawn ();
+		BlockSpawn ();
+		if (instance) Destroy(this);
+		else instance = this;
 	}
 	
 	// Update is called once per frame
@@ -34,6 +39,7 @@ public class SpawnBlock : MonoBehaviour {
 		nextBlockPrefab = blockList [bx];
 		nextBlock = bx;
 		currentBlock = Instantiate(nextBlockPrefab, nextSpawnPoint.transform.position, Quaternion.identity) as GameObject;
+		currentBlock.transform.gameObject.transform.parent = cam.transform;
 	}
 }
 
