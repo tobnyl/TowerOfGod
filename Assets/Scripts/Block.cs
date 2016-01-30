@@ -38,12 +38,15 @@ public class Block : MonoBehaviour {
                 var startPosition = transform.position - offsetIncrement;
                 var offset = Vector3.zero;
 
-                AudioManager.Instance.Play(ExplosionClip, 0.8f, 1.0f, 0.95f, 1.05f);
+                var volume = 1.0f;
 
                 for (int i = 0; i < numExplosions; i++)
                 {                    
                     var explosion = Instantiate(ExplosionPrefab, startPosition + offset, Quaternion.identity);
+                    AudioManager.Instance.Play(ExplosionClip, volume, volume, 0.95f, 1.05f);
                     Destroy(explosion, 1.0f);
+
+                    volume -= 0.33333f;
 
                     offset += offsetIncrement;
                 }
