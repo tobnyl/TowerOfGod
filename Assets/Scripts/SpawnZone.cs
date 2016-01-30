@@ -18,14 +18,14 @@ public class SpawnZone : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.tag == "Joint") {
 			gb.inSpawn = true;
-			Debug.Log ("Enter OnTriggerEnter2D");
+			//Debug.Log ("Enter OnTriggerEnter2D");
 		}
 	}
 	void OnTriggerExit2D (Collider2D other)
 	{
 		if (other.gameObject.tag == "Joint") {
 			gb.inSpawn = false;
-			Debug.Log ("Exit OnTriggerExit2D");
+			//Debug.Log ("Exit OnTriggerExit2D");
 		}
 	}
 }

@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour {
 	public float HighestX = 0;
 	public float LowestX = 0;
 
+    [Range(0.0f, 20f)]
+    public float DestroyBlockThreshold;
+
 	// privates
 	private const float UPDATE_LATENCY = 0.1f;
 	private IEnumerator updateBoundariesRoutine;

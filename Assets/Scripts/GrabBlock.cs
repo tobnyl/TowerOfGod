@@ -91,4 +91,7 @@ public class GrabBlock : MonoBehaviour
 
 		}
 	}
+	public void clearUsedBlocks(){
+		usedBlocks = 0;
+	}
 }
