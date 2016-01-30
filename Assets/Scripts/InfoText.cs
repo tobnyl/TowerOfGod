@@ -2,24 +2,37 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class InfoText : MonoBehaviour {
-public Text scoreText;
-public GameObject cam;
-public bool score;
-public GrabBlock gb;
+public class InfoText : MonoBehaviour
+{
+    public Text scoreText;
+    public Text highScoreText;
+    public GameObject cam;
+    public bool score;
+    private float _highScore;
+	public GrabBlock gb;
 
-// Use this for initialization
-void Start () {
-	gb = cam.GetComponent <GrabBlock>();
-}
-
-// Update is called once per frame
-void Update () {
-	if (score) {
-			scoreText.text = "Score: " + Mathf.RoundToInt(GameManager.GetHighestPoint()) + "\n Blocks: " + gb.usedBlocks;
-
-
+	// Use this for initialization
+	void Start ()
+	{
+		gb = cam.GetComponent <GrabBlock>();
+	    _highScore = 0;
 	}
-	Debug.Log (GameManager.Instance.HighestPoint);
-}
+
+	// Update is called once per frame
+	void Update () {
+
+		if (score)
+		{
+		    var currentScore = Mathf.RoundToInt(GameManager.GetHighestPoint());
+
+		    if (currentScore > _highScore)
+		    {
+		        _highScore = currentScore;
+		    }
+
+			scoreText.text = "" + currentScore + "\n Blocks: " + gb.usedBlocks;;
+		    highScoreText.text = _highScore.ToString();
+		}
+		Debug.Log (GameManager.Instance.HighestPoint);
+	}
 }

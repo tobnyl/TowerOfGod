@@ -42,23 +42,18 @@ public class CameraMovement : MonoBehaviour
 
         // Vertical
 		var towerTopPositionY = GameManager.GetHighestPoint();
-       // Debug.Log("Towertop: " + towerTopPositionY);
 
 		if (towerTopPositionY > TwrTopThreshold)
 	    {
 	        var tempMoveY = cameraPosition.y += _moveAmount.y;
 
-            Debug.Log("Yes");
-
 	        if (tempMoveY - _viewPortWorldSize.y/2f < 0)
 	        {
                 tempMoveY = _viewPortWorldSize.y/2f;
-	            Debug.Log("Lowest point...");
 	        }
 	        else if (tempMoveY > towerTopPositionY)
 	        {
                 tempMoveY = towerTopPositionY;
-	            Debug.Log("Highest point...");
 	        }
 	        else
 	        {
