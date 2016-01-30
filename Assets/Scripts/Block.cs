@@ -8,6 +8,7 @@ public class Block : MonoBehaviour {
 	public bool inPlay;
 	public float SpawnAngle = 0;
     public GameObject ExplosionPrefab;
+    public AudioClip ExplosionClip;
 
 	// publics
 	public bool interactable = false;
@@ -34,6 +35,8 @@ public class Block : MonoBehaviour {
                 var numExplosions = 3;
                 var startPosition = transform.position - offsetIncrement;
                 var offset = Vector3.zero;
+
+                AudioManager.Instance.Play(ExplosionClip, 0.8f, 1.0f, 0.95f, 1.05f);
 
                 for (int i = 0; i < numExplosions; i++)
                 {                    
