@@ -9,6 +9,7 @@ public class CameraMovement : MonoBehaviour
     public float Speed = 5f;
     public float SmoothTime = 0.15f;
 	public float TwrTopThreshold;
+    public float ScrollSensitivity = 1.0f;
 
     private Vector3 _moveAmount;
     private Vector3 _smoothMoveVelocity;
@@ -32,8 +33,10 @@ public class CameraMovement : MonoBehaviour
 
         var moveDir = new Vector3(
             Input.GetAxisRaw("Horizontal"),
-            Input.GetAxisRaw("Vertical"),
+            Input.GetAxis("Mouse ScrollWheel"),
 	        0).normalized;
+
+	    moveDir.y *= ScrollSensitivity;
 
         Vector3 targetMoveAmount = moveDir * Speed;
         _moveAmount = Vector3.SmoothDamp(_moveAmount, targetMoveAmount, ref _smoothMoveVelocity, SmoothTime);
