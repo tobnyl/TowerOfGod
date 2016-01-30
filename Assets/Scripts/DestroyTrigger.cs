@@ -18,7 +18,7 @@ public class DestroyTrigger : MonoBehaviour
     {
 	    if (_numDestroyedObjects > GameOverThreshold)
 	    {
-	        Debug.Log("Game over!");
+	        //Debug.Log("Game over!");
 	    }
 	}
 	void OnTriggerEnter2D(Collider2D other){
