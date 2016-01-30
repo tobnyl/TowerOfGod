@@ -36,11 +36,12 @@ public class GameManager : MonoBehaviour {
 
 			for (int i = 0; i < Block.AllBlocks.Count; i++) {
 				if(Block.AllBlocks[i] == GrabBlock.GrabbedBlock){
+					Debug.Log ("1: " + i);
 					continue;
 				}
 				PolygonCollider2D pColl = Block.AllBlocks[i].GetComponent<PolygonCollider2D>();
 				for (int o = 0; o < pColl.points.Length; o++) {
-					Vector2 v = pColl.points[i] + (Vector2)(pColl.transform.position);
+					Vector2 v = pColl.points[o] + (Vector2)(pColl.transform.position);
 					if (v.y > highY) {
 						highY = v.y;
 					}
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour {
 			HighestPoint = highY;
 			HighestX = highX;
 			LowestX = lowX;
+			Debug.Log (HighestPoint);
 
 			yield return new WaitForSeconds(UPDATE_LATENCY);
 		}
@@ -63,12 +65,12 @@ public class GameManager : MonoBehaviour {
 	public static float GetHighestPoint(){
 		float highY = 0;
 		for (int i = 0; i < Block.AllBlocks.Count; i++) {
-			if(Block.AllBlocks[i] == GrabBlock.GrabbedBlock){
+			if(Block.AllBlocks[i] == GrabBlock.GrabbedBlock || Block.AllBlocks[i].inPlay == false){
 				continue;
 			}
 			PolygonCollider2D pColl = Block.AllBlocks[i].GetComponent<PolygonCollider2D>();
 			for (int o = 0; o < pColl.points.Length; o++) {
-				float y = pColl.points[i].y + pColl.transform.position.y;
+				float y = pColl.points[o].y + pColl.transform.position.y;
 				if (y > highY) {
 					highY = y;
 				}
@@ -85,7 +87,7 @@ public class GameManager : MonoBehaviour {
 			}
 			PolygonCollider2D pColl = Block.AllBlocks[i].GetComponent<PolygonCollider2D>();
 			for (int o = 0; o < pColl.points.Length; o++) {
-				float x = pColl.points[i].x + pColl.transform.position.x;
+				float x = pColl.points[o].x + pColl.transform.position.x;
 				if (x > highX) {
 					highX = x;
 				}
@@ -102,7 +104,7 @@ public class GameManager : MonoBehaviour {
 			}
 			PolygonCollider2D pColl = Block.AllBlocks[i].GetComponent<PolygonCollider2D>();
 			for (int o = 0; o < pColl.points.Length; o++) {
-				float x = pColl.points[i].x + pColl.transform.position.x;
+				float x = pColl.points[o].x + pColl.transform.position.x;
 				if (x < lowX) {
 					lowX = x;
 				}

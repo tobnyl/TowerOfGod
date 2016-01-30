@@ -47,6 +47,7 @@ public class GrabBlock : MonoBehaviour
 				GrabbedBlock = hit.transform.gameObject;
 				coll = GrabbedBlock.GetComponent<Collider2D> ();
 				coll.isTrigger = false;
+				GrabbedBlock.layer = 0;
 				grabbedRB = GrabbedBlock.GetComponent<Rigidbody2D>();
 				grabbedRB.isKinematic = false;
 				grabbedRB.gravityScale = 0;
@@ -64,6 +65,7 @@ public class GrabBlock : MonoBehaviour
 				joint.connectedBody = null;
 				joint.connectedAnchor = Vector2.zero;
 				grabbedRB.gravityScale = 1;
+				block.inPlay = true;
 				GrabbedBlock.transform.parent = null;
 				GrabbedBlock = null;
 				SpawnBlock.instance.BlockSpawn();

@@ -40,7 +40,8 @@ public class CameraMovement : MonoBehaviour
         cameraPosition += _moveAmount;
 
         // Vertical
-		var towerTopPositionY = Mathf.Max(GameManager.GetHighestPoint(), 5);
+		var towerTopPositionY = GameManager.GetHighestPoint();
+//		var towerTopPositionY = Mathf.Max(GameManager.GetHighestPoint(), 5);
 
         if (cameraPosition.y - _viewPortWorldSize.y / 2f < 0)
         {
