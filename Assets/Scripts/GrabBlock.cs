@@ -4,11 +4,12 @@ using System.Collections;
 public class GrabBlock : MonoBehaviour 
 {
 	SpringJoint2D joint;
+	Block block;
 	private Vector2 mousePos;
 	public GameObject mousePointPrefab;
 	public GameObject spawnedPrefab;
 	public GameObject prefabChild;
-	public GameObject grabbedBlock;
+	public static GameObject GrabbedBlock;
 	public float HoldForce = 1;
 	private Rigidbody2D grabbedRB;
 
@@ -20,7 +21,7 @@ public class GrabBlock : MonoBehaviour
 				spawnedPrefab.transform.position = mousePos;
 
 				if (grabbedRB != null) {
-					grabbedRB.velocity = (Vector2)(spawnedPrefab.transform.position - grabbedBlock.transform.position) * HoldForce;
+					grabbedRB.velocity = (Vector2)(spawnedPrefab.transform.position - GrabbedBlock.transform.position) * HoldForce;
 				}
 			}
 		}
@@ -38,13 +39,17 @@ public class GrabBlock : MonoBehaviour
 			hit = Physics2D.Raycast(new Vector2(worldPoint.x, worldPoint.y), Vector3.forward, Mathf.Infinity);
 			if(hit.transform != null)
 			{
+				block = hit.transform.gameObject.GetComponent<Block>();
+				if (block.interactable){
 				spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
 				joint = spawnedPrefab.GetComponent<SpringJoint2D>();
-				grabbedBlock = hit.transform.gameObject;
-				grabbedRB = grabbedBlock.GetComponent<Rigidbody2D>();
+				GrabbedBlock = hit.transform.gameObject;
+				grabbedRB = GrabbedBlock.GetComponent<Rigidbody2D>();
+				grabbedRB.isKinematic = false;
 				grabbedRB.gravityScale = 0;
 				joint.connectedBody = grabbedRB;
-				joint.connectedAnchor = spawnedPrefab.transform.position - grabbedBlock.transform.position;
+				joint.connectedAnchor = spawnedPrefab.transform.position - GrabbedBlock.transform.position;
+				}
 
 			}
 		}
@@ -52,11 +57,12 @@ public class GrabBlock : MonoBehaviour
 		if (Input.GetMouseButtonUp (0))
 		{
 			if(spawnedPrefab != null){
+				block.interactable = false;
 				joint.connectedBody = null;
 				joint.connectedAnchor = Vector2.zero;
 				grabbedRB.gravityScale = 1;
-				grabbedBlock.transform.parent = null;
-				grabbedBlock = null;
+				GrabbedBlock.transform.parent = null;
+				GrabbedBlock = null;
 				Destroy (spawnedPrefab.gameObject);
 			}
 		}
