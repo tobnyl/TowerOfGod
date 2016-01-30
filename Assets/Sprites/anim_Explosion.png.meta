@@ -1,15 +1,21 @@
 fileFormatVersion: 2
-guid: 83e0e90fc42b647d683478f63746e375
-timeCreated: 1454167515
+guid: 36b64781a7c8340aa9f6ae4168248994
+timeCreated: 1454163604
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: ss_Tiles_0
-    21300002: ss_Tiles_1
-    21300004: ss_Tiles_2
-    21300006: ss_Tiles_3
-    21300008: ss_Tiles_4
-    21300010: ss_Tiles_5
+    21300000: anim_Explosion_0
+    21300002: anim_Explosion_1
+    21300004: anim_Explosion_2
+    21300006: anim_Explosion_3
+    21300008: anim_Explosion_4
+    21300010: anim_Explosion_5
+    21300012: anim_Explosion_6
+    21300014: anim_Explosion_7
+    21300016: anim_Explosion_8
+    21300018: anim_Explosion_9
+    21300020: anim_Explosion_10
+    21300022: anim_Explosion_11
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -39,54 +45,24 @@ TextureImporter:
     aniso: 16
     mipBias: -1
     wrapMode: 1
-  nPOTScale: 0
+  nPOTScale: 1
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 2
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 20
-  alphaIsTransparency: 1
-  textureType: 8
+  alphaIsTransparency: 0
+  textureType: 0
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: ss_Tiles_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ss_Tiles_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ss_Tiles_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ss_Tiles_3
+    - name: anim_Explosion_0
       rect:
         serializedVersion: 2
         x: 0
@@ -96,7 +72,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ss_Tiles_4
+    - name: anim_Explosion_1
       rect:
         serializedVersion: 2
         x: 32
@@ -106,10 +82,100 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ss_Tiles_5
+    - name: anim_Explosion_2
       rect:
         serializedVersion: 2
         x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim_Explosion_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim_Explosion_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim_Explosion_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim_Explosion_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim_Explosion_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim_Explosion_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim_Explosion_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim_Explosion_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim_Explosion_11
+      rect:
+        serializedVersion: 2
+        x: 352
         y: 0
         width: 32
         height: 32
