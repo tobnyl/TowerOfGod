@@ -24,25 +24,25 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void LateUpdate()
-    {
-        foreach (var audioClip in audioClipsQueue)
-        {
-            Play(audioClip, 1, 1, 1, 1);
-        }
+    //void LateUpdate()
+    //{
+    //    foreach (var audioClip in audioClipsQueue)
+    //    {
+    //        Play(audioClip, 1, 1, 1, 1);
+    //    }
 
-        audioClipsQueue.Clear();
-    }
+    //    audioClipsQueue.Clear();
+    //}
 
-    public void AddAudioClipToQueue(AudioClip clip)
-    {
-        if (!audioClipsQueue.Contains(clip))
-        {
-            audioClipsQueue.Add(clip);
-        }
+    //public void AddAudioClipToQueue(AudioClip clip, float minVol, float maxVol)
+    //{
+    //    if (!audioClipsQueue.Contains(clip))
+    //    {
+    //        audioClipsQueue.Add(clip);
+    //    }
 
         
-    }
+    //}
 
     public void Play(AudioClip clip, float minVol = 1.0f, float maxVol = 1.0f, float minPitch = 1.0f, float maxPitch = 1.0f)
     {
