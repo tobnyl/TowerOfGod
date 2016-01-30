@@ -65,12 +65,12 @@ public class GameManager : MonoBehaviour {
 	public static float GetHighestPoint(){
 		float highY = 0;
 		for (int i = 0; i < Block.AllBlocks.Count; i++) {
-			if(Block.AllBlocks[i] == GrabBlock.GrabbedBlock){
+			if(Block.AllBlocks[i] == GrabBlock.GrabbedBlock || Block.AllBlocks[i].inPlay == false){
 				continue;
 			}
 			PolygonCollider2D pColl = Block.AllBlocks[i].GetComponent<PolygonCollider2D>();
 			for (int o = 0; o < pColl.points.Length; o++) {
-				float y = pColl.points[i].y + pColl.transform.position.y;
+				float y = pColl.points[o].y + pColl.transform.position.y;
 				if (y > highY) {
 					highY = y;
 				}
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour {
 			}
 			PolygonCollider2D pColl = Block.AllBlocks[i].GetComponent<PolygonCollider2D>();
 			for (int o = 0; o < pColl.points.Length; o++) {
-				float x = pColl.points[i].x + pColl.transform.position.x;
+				float x = pColl.points[o].x + pColl.transform.position.x;
 				if (x > highX) {
 					highX = x;
 				}
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour {
 			}
 			PolygonCollider2D pColl = Block.AllBlocks[i].GetComponent<PolygonCollider2D>();
 			for (int o = 0; o < pColl.points.Length; o++) {
-				float x = pColl.points[i].x + pColl.transform.position.x;
+				float x = pColl.points[o].x + pColl.transform.position.x;
 				if (x < lowX) {
 					lowX = x;
 				}

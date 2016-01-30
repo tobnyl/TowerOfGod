@@ -65,6 +65,7 @@ public class GrabBlock : MonoBehaviour
 				joint.connectedBody = null;
 				joint.connectedAnchor = Vector2.zero;
 				grabbedRB.gravityScale = 1;
+				block.inPlay = true;
 				GrabbedBlock.transform.parent = null;
 				GrabbedBlock = null;
 				SpawnBlock.instance.BlockSpawn();
