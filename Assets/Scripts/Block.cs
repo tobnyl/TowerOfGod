@@ -27,7 +27,7 @@ public class Block : MonoBehaviour {
         if (otherBlock != null)
         {
             Debug.Log(c.relativeVelocity.magnitude);
-            if (gameObject.tag == "Block" &&  c.relativeVelocity.magnitude > GameManager.Instance.DestroyBlockThreshold)
+            if (gameObject.tag == "Block" && otherBlock.tag == "Block" &&  c.relativeVelocity.magnitude > GameManager.Instance.DestroyBlockThreshold)
             {
                 Destroy(c.gameObject);
             }
