@@ -28,12 +28,20 @@ public class Block : MonoBehaviour {
        
         if (otherBlock != null) 
         {
-            Debug.Log(c.relativeVelocity.magnitude);
             if (gameObject.tag == "Block" && otherBlock.tag == "Block" &&  c.relativeVelocity.magnitude > GameManager.Instance.DestroyBlockThreshold)
             {
-                var explosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
-                Destroy(explosion, 1.0f);
+                var offsetIncrement = transform.lossyScale/2f;
+                var numExplosions = 3;
+                var startPosition = transform.position - offsetIncrement;
+                var offset = Vector3.zero;
 
+                for (int i = 0; i < numExplosions; i++)
+                {                    
+                    var explosion = Instantiate(ExplosionPrefab, startPosition + offset, Quaternion.identity);
+                    Destroy(explosion, 1.0f);
+
+                    offset += offsetIncrement;
+                }
 
                 Destroy(c.gameObject);
             }     
