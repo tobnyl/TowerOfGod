@@ -30,8 +30,8 @@ public class InfoText : MonoBehaviour
 		        _highScore = currentScore;
 		    }
 
-			scoreText.text = "" + currentScore + "\n Blocks: " + gb.usedBlocks;;
-		    highScoreText.text = _highScore.ToString();
+			scoreText.text = "Score: " + currentScore + " \n Highscore: " + _highScore + "\n Blocks: " + gb.usedBlocks;
+		    
 		}
 		Debug.Log (GameManager.Instance.HighestPoint);
 	}
