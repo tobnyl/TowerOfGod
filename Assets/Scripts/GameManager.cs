@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour {
 			HighestPoint = highY;
 			HighestX = highX;
 			LowestX = lowX;
-			Debug.Log (HighestPoint);
+//			Debug.Log (HighestPoint);
 
 			yield return new WaitForSeconds(UPDATE_LATENCY);
 		}
