@@ -13,7 +13,7 @@ public class SpawnBlock : MonoBehaviour {
 	public int bx;
 	public int nextBlock;
 
-	public static float SpawnSize = 0.25f;
+	public static float SpawnSize = 0.5f;
 
 
 	// Use this for initialization
