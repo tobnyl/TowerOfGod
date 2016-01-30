@@ -12,6 +12,7 @@ public class GrabBlock : MonoBehaviour
 	public static GameObject GrabbedBlock;
 	public float HoldForce = 1;
 	private Rigidbody2D grabbedRB;
+	private Collider2D coll;
 
 
 	void FixedUpdate(){
@@ -44,6 +45,8 @@ public class GrabBlock : MonoBehaviour
 				spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
 				joint = spawnedPrefab.GetComponent<SpringJoint2D>();
 				GrabbedBlock = hit.transform.gameObject;
+				coll = GrabbedBlock.GetComponent<Collider2D> ();
+				coll.isTrigger = false;
 				grabbedRB = GrabbedBlock.GetComponent<Rigidbody2D>();
 				grabbedRB.isKinematic = false;
 				grabbedRB.gravityScale = 0;
