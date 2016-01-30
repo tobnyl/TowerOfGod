@@ -46,6 +46,8 @@ public class GrabBlock : MonoBehaviour
 				block = hit.transform.GetComponent<Block>();
 				if (block != null) {
 					if (block.interactable){
+						block.transform.localScale = Vector3.one;
+
 						spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
 						GrabbedBlock = hit.transform.gameObject;
 						joint = GrabbedBlock.GetComponent<SpringJoint2D>();
@@ -75,13 +77,16 @@ public class GrabBlock : MonoBehaviour
 			}
 		} 
 		if (Input.GetMouseButtonUp (0) && inSpawn) {
+			GrabbedBlock.transform.localScale = Vector3.one;
+			GrabbedBlock.transform.localScale *= SpawnBlock.SpawnSize;
+
 			coll.isTrigger = true;
 			GrabbedBlock.layer = 7;
 			grabbedRB.isKinematic = true;
 			Destroy (spawnedPrefab.gameObject);
 			joint.anchor = new Vector2(0f,0f);
 			joint.connectedBody = null;
-			GrabbedBlock.transform.rotation = Quaternion.identity;
+			GrabbedBlock.transform.eulerAngles = new Vector3(0, 0, GrabbedBlock.GetComponent<Block>().SpawnAngle);
 			GrabbedBlock.transform.position = mainSpawnPoint.transform.position;
 
 		}

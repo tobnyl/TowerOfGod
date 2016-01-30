@@ -6,6 +6,7 @@ public class Block : MonoBehaviour {
 	// public statics
 	public static List<Block> AllBlocks = new List<Block>();
 	public bool inPlay;
+	public float SpawnAngle = 0;
 
 	// publics
 	public bool interactable = false;
