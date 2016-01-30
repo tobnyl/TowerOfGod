@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour {
 
 	private IEnumerator _UpdateBoundaries(){
 		while (true) {
-
 			float highY = 0;
 			float highX = 0;
 			float lowX = 0;
