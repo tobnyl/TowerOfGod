@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
@@ -11,13 +12,37 @@ public class AudioManager : MonoBehaviour
         get { return _instance; }
     }
 
+    private List<AudioClip> audioClipsQueue; 
+
     void Awake()
     {
+        audioClipsQueue = new List<AudioClip>();
+
         if (_instance == null)
         {
             _instance = GetComponent<AudioManager>();
         }
     }
+
+    //void LateUpdate()
+    //{
+    //    foreach (var audioClip in audioClipsQueue)
+    //    {
+    //        Play(audioClip, 1, 1, 1, 1);
+    //    }
+
+    //    audioClipsQueue.Clear();
+    //}
+
+    //public void AddAudioClipToQueue(AudioClip clip, float minVol, float maxVol)
+    //{
+    //    if (!audioClipsQueue.Contains(clip))
+    //    {
+    //        audioClipsQueue.Add(clip);
+    //    }
+
+        
+    //}
 
     public void Play(AudioClip clip, float minVol = 1.0f, float maxVol = 1.0f, float minPitch = 1.0f, float maxPitch = 1.0f)
     {
