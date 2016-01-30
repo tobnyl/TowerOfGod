@@ -37,26 +37,43 @@ public class CameraMovement : MonoBehaviour
         Vector3 targetMoveAmount = moveDir * Speed;
         _moveAmount = Vector3.SmoothDamp(_moveAmount, targetMoveAmount, ref _smoothMoveVelocity, SmoothTime);
 
-        cameraPosition += _moveAmount;
+        
 
         // Vertical
 		var towerTopPositionY = GameManager.GetHighestPoint();
-//		var towerTopPositionY = Mathf.Max(GameManager.GetHighestPoint(), 5);
+        Debug.Log("Towertop: " + towerTopPositionY);
 
-        if (cameraPosition.y - _viewPortWorldSize.y / 2f < 0)
-        {
-            cameraPosition.y = _viewPortWorldSize.y/2f;
-            Debug.Log("Lowest point...");
-        }
-        else if (cameraPosition.y > towerTopPositionY)
-        {
-            cameraPosition.y = towerTopPositionY;
-            Debug.Log("Highest point...");
+	    if (towerTopPositionY > 9)
+	    {
+	        var tempMoveY = cameraPosition.y += _moveAmount.y;
+
+            Debug.Log("Yes");
+
+	        if (tempMoveY - _viewPortWorldSize.y/2f < 0)
+	        {
+                tempMoveY = _viewPortWorldSize.y/2f;
+	            Debug.Log("Lowest point...");
+	        }
+	        else if (tempMoveY > towerTopPositionY)
+	        {
+                tempMoveY = towerTopPositionY;
+	            Debug.Log("Highest point...");
+	        }
+	        else
+	        {
+	            _moveAmount.y = 0;
+	        }
+
+            cameraPosition.y += _moveAmount.y;
         }
 
-        // Horizontal
+	    cameraPosition.y = Mathf.Clamp(cameraPosition.y, _viewPortWorldSize.y / 2f, Mathf.Max(_viewPortWorldSize.y/2f, towerTopPositionY));
+
+	    // Horizontal
 	    var towerLeftBlock = GameManager.GetLowestX();
 	    var towerRightBlock = GameManager.GetHighestX();
+
+        cameraPosition.x += _moveAmount.x;
 
         if (cameraPosition.x < towerLeftBlock)
         {
