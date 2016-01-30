@@ -7,6 +7,7 @@ public class Block : MonoBehaviour {
 	public static List<Block> AllBlocks = new List<Block>();
 	public bool inPlay;
 	public float SpawnAngle = 0;
+    public GameObject ExplosionPrefab;
 
 	// publics
 	public bool interactable = false;
@@ -30,9 +31,12 @@ public class Block : MonoBehaviour {
             Debug.Log(c.relativeVelocity.magnitude);
             if (gameObject.tag == "Block" && otherBlock.tag == "Block" &&  c.relativeVelocity.magnitude > GameManager.Instance.DestroyBlockThreshold)
             {
+                var explosion = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
+                Destroy(explosion, 1.0f);
+
+
                 Destroy(c.gameObject);
-            }
-            //Debug.Log("This: " + rigidBody.velocity + " | Other: " + rigidBody.velocity);          
+            }     
         }
     }
 }
