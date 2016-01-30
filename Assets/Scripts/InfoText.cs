@@ -15,7 +15,7 @@ void Start () {
 // Update is called once per frame
 void Update () {
 	if (score) {
-			scoreText.text = "" + GameManager.Instance.HighestPoint;
+			scoreText.text = "" + GameManager.Instance.HighestPoint + "";
 	}
 	Debug.Log (GameManager.Instance.HighestPoint);
 }
