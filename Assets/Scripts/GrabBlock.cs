@@ -15,7 +15,7 @@ public class GrabBlock : MonoBehaviour
 	private Rigidbody2D grabbedRB;
 	private Collider2D coll;
 	public bool inSpawn;
-
+	public int usedBlocks;
 
 	void FixedUpdate(){
 		if (Input.GetMouseButton(0))
@@ -63,6 +63,7 @@ public class GrabBlock : MonoBehaviour
 
 		if (Input.GetMouseButtonUp (0) && !inSpawn) {
 			if (spawnedPrefab != null) {
+				usedBlocks++;
 				joint.enabled = false; // this fixing a major bug (I guess we won't need it anyway?)
 				block.interactable = false;
 				block.inPlay = true;
