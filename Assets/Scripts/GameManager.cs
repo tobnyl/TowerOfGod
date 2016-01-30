@@ -36,11 +36,12 @@ public class GameManager : MonoBehaviour {
 
 			for (int i = 0; i < Block.AllBlocks.Count; i++) {
 				if(Block.AllBlocks[i] == GrabBlock.GrabbedBlock){
+					Debug.Log ("1: " + i);
 					continue;
 				}
 				PolygonCollider2D pColl = Block.AllBlocks[i].GetComponent<PolygonCollider2D>();
 				for (int o = 0; o < pColl.points.Length; o++) {
-					Vector2 v = pColl.points[i] + (Vector2)(pColl.transform.position);
+					Vector2 v = pColl.points[o] + (Vector2)(pColl.transform.position);
 					if (v.y > highY) {
 						highY = v.y;
 					}
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour {
 			HighestPoint = highY;
 			HighestX = highX;
 			LowestX = lowX;
+			Debug.Log (HighestPoint);
 
 			yield return new WaitForSeconds(UPDATE_LATENCY);
 		}
