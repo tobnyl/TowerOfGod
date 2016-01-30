@@ -24,7 +24,7 @@ public class Block : MonoBehaviour {
         var otherRigidBody = c.gameObject.GetComponent<Rigidbody2D>();
         var rigidBody = GetComponent<Rigidbody2D>();
        
-        if (otherBlock != null)
+        if (otherBlock != null) 
         {
             Debug.Log(c.relativeVelocity.magnitude);
             if (gameObject.tag == "Block" && otherBlock.tag == "Block" &&  c.relativeVelocity.magnitude > GameManager.Instance.DestroyBlockThreshold)
