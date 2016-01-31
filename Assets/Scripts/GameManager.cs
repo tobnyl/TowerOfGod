@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 	public float HighestPoint = 0;
 	public float HighestX = 0;
 	public float LowestX = 0;
+    
 
     [Range(0.0f, 20f)]
     public float DestroyBlockThreshold;
@@ -23,23 +24,6 @@ public class GameManager : MonoBehaviour {
 		if (Instance) Destroy(this);
 		else Instance = this;
 	}
-
-    void Update()
-    {
-        if (Input.GetButtonDown("Cancel"))
-        {            
-            if (Time.timeScale == 0f)
-            {
-                Time.timeScale = 1;
-                Debug.Log("Game is running");
-            }
-            else
-            {
-                Time.timeScale = 0;
-                Debug.Log("Game is paused");
-            }
-        }
-    }
 
 	void OnEnable(){
 		updateBoundariesRoutine = _UpdateBoundaries();
