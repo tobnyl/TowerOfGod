@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class Block : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class Block : MonoBehaviour {
     public GameObject ExplosionPrefab;
     public AudioClip ExplosionClip;
     public AudioClip StackClip;
+    public AudioMixerGroup ExplosionMixer;
+    public AudioMixerGroup StackMixer;
 
 	// publics
 	public bool Interactive = false;
@@ -46,7 +49,7 @@ public class Block : MonoBehaviour {
                 var offset = Vector3.zero;
 
                 //AudioManager.Instance.AddAudioClipToQueue(ExplosionClip);
-                AudioManager.Instance.Play(ExplosionClip, 0.01f, 0.06f, 0.99f, 1.01f);
+                AudioManager.Instance.Play(ExplosionClip, ExplosionMixer, 0.01f, 0.06f, 0.99f, 1.01f);
 
                 for (int i = 0; i < numExplosions; i++)
                 {                    
@@ -75,6 +78,6 @@ public class Block : MonoBehaviour {
 
         //AudioManager.Instance.AddAudioClipToQueue(StackClip);
 
-        AudioManager.Instance.Play(StackClip, vol, vol, 1.0f, 1.0f);
+        AudioManager.Instance.Play(StackClip, StackMixer, vol, vol, 1.0f, 1.0f);
     }
 }
