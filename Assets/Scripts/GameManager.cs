@@ -23,6 +23,24 @@ public class GameManager : MonoBehaviour {
 		if (Instance) Destroy(this);
 		else Instance = this;
 	}
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {            
+            if (Time.timeScale == 0f)
+            {
+                Time.timeScale = 1;
+                Debug.Log("Game is running");
+            }
+            else
+            {
+                Time.timeScale = 0;
+                Debug.Log("Game is paused");
+            }
+        }
+    }
+
 	void OnEnable(){
 		updateBoundariesRoutine = _UpdateBoundaries();
 		StartCoroutine(updateBoundariesRoutine);

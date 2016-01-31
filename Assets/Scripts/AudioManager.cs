@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     public AudioSource AudioSourcePrefab;
+    public AudioMixerGroup Music;
+    public AudioMixerGroup SoundEffects;
 
     private static AudioManager _instance;
     public static AudioManager Instance
@@ -44,7 +47,7 @@ public class AudioManager : MonoBehaviour
         
     //}
 
-    public void Play(AudioClip clip, float minVol = 1.0f, float maxVol = 1.0f, float minPitch = 1.0f, float maxPitch = 1.0f)
+    public void Play(AudioClip clip, AudioMixerGroup group, float minVol = 1.0f, float maxVol = 1.0f, float minPitch = 1.0f, float maxPitch = 1.0f)
     {
         AudioSource audioSource = Instantiate(AudioSourcePrefab, transform.position, transform.rotation) as AudioSource;
         audioSource.transform.parent = this.transform;
@@ -65,6 +68,7 @@ public class AudioManager : MonoBehaviour
         audioSourceExtended.Duration = clip.length;
 
         audioSource.clip = clip;
+        audioSource.outputAudioMixerGroup = group;
         audioSource.Play();
     }
 }
