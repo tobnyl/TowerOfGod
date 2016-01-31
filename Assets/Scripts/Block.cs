@@ -72,7 +72,6 @@ public class Block : MonoBehaviour {
     private void PlayStackSoundEffect(Collision2D c)
     {
         var vol = Mathf.Max(0.3f, Mathf.Abs(c.relativeVelocity.normalized.y) / 4f);
-        Debug.Log(vol);
 
         //AudioManager.Instance.AddAudioClipToQueue(StackClip);
 

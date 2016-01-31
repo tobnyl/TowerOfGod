@@ -16,6 +16,7 @@ public class GrabBlock : MonoBehaviour
 	private Collider2D coll;
 	public bool inSpawn;
 	public int usedBlocks;
+    public AudioClip GrabClip;
 
 	void FixedUpdate(){
 		if (Input.GetMouseButton(0))
@@ -38,11 +39,24 @@ public class GrabBlock : MonoBehaviour
 			hit = Physics2D.Raycast(new Vector2(worldPoint.x, worldPoint.y), Vector3.forward, Mathf.Infinity);
 			if(hit.transform != null)
 			{
+                
+
 				block = hit.transform.GetComponent<Block>();
 				if (block != null) {
-					if (block.Interactive){
+					if (block.Interactive)
+					{
 
-						spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
+					    var hitRb = hit.transform.GetComponent<Rigidbody2D>();
+
+
+
+					    var vol = 0.05f;// + hitRb.mass / 50f;
+					    var pitch = 1.0f - hitRb.mass/20f;
+                        Debug.Log("Rb: " + vol + " " + pitch);
+
+                        AudioManager.Instance.Play(GrabClip, vol, vol, pitch, pitch);
+
+                        spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
 						GrabbedBlock = hit.transform.gameObject;
 						joint = GrabbedBlock.GetComponent<SpringJoint2D>();
 						coll = GrabbedBlock.GetComponent<Collider2D> ();
