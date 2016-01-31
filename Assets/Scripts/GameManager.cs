@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
 	// public statics
 	public static GameManager Instance;
+	public bool LockOldBlockInput;
 	public float HighestPoint = 0;
 	public float HighestX = 0;
 	public float LowestX = 0;
