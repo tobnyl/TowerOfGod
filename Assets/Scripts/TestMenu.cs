@@ -13,6 +13,12 @@ public class TestMenu : MonoBehaviour {
 	public Button creditText;
 	public Button exitText;
 
+	public bool InstructionsOn = false;
+	public bool CreditsOn = false;
+
+
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -34,32 +40,45 @@ public class TestMenu : MonoBehaviour {
 
 	public void InstructionPress()
 	{
-		startText.enabled = false;
-		instructionText.enabled = false;
-		exitText.enabled = false;
+		InstructionsOn = !InstructionsOn;
 
-		
-		instructionMenu.enabled = true;
-		creditMenu.enabled = false;
-		quitMenu.enabled = false;
+		if(InstructionsOn)
+		{
+			instructionMenu.enabled = true;
+			//instructionText.enabled = true;
+
+			//startText.enabled = false;
+			//exitText.enabled = false;
+			quitMenu.enabled = false;
+			creditMenu.enabled = false;
+		}
+		else {
+			instructionMenu.enabled = false;
+		}
 	}
 
 	public void CreditPress()
 	{
-		startText.enabled = false;
-		instructionText.enabled = false;
-		exitText.enabled = false;
+		CreditsOn = !CreditsOn;
+		if (CreditsOn) {
+			creditMenu.enabled = true;
 
-		instructionMenu.enabled = false;
-		creditMenu.enabled = true;
-		quitMenu.enabled = false;
-
+			//startText.enabled = false;
+			//instructionText.enabled = false;
+			instructionMenu.enabled = false;
+			//exitText.enabled = false;
+			quitMenu.enabled = false;
+		}
+		else {
+			creditMenu.enabled = false;
+		}
 	}
 
 	public void ExitPress()
 	{
 		startText.enabled = false;
 		instructionText.enabled = false;
+		creditText.enabled = false;
 		exitText.enabled = false;
 
 		instructionMenu.enabled = false;
@@ -86,7 +105,7 @@ public class TestMenu : MonoBehaviour {
 
 	public void MainLevel ()
 	{
-		Application.LoadLevel(2);
+		Application.LoadLevel(1);
 	}
 	
 
