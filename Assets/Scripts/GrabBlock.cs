@@ -77,8 +77,10 @@ public class GrabBlock : MonoBehaviour
 				}
 
 				joint.enabled = false; // this fixing a major bug (I guess we won't need it anyway?)
-				//block.Interactive = false;
 				block.IsNew = false;
+				if (GameManager.Instance.LockOldBlockInput) {
+					block.Interactive = false;
+				}
 
 				GrabbedBlock.transform.parent = null;
 				GrabbedBlock = null;
