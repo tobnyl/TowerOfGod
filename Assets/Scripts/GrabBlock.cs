@@ -40,23 +40,26 @@ public class GrabBlock : MonoBehaviour
 			{
 				block = hit.transform.GetComponent<Block>();
 				if (block != null) {
-					if (block.interactable){
+					if (block.Interactive){
 
 						spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
-
-						Vector2 dist =  hit.point - (Vector2)block.transform.position;
-						dist /= SpawnBlock.SpawnSize;
-						block.transform.position = hit.point - dist;
-						block.transform.localScale = Vector3.one;
-
-						
 						GrabbedBlock = hit.transform.gameObject;
 						joint = GrabbedBlock.GetComponent<SpringJoint2D>();
 						coll = GrabbedBlock.GetComponent<Collider2D> ();
+						grabbedRB = GrabbedBlock.GetComponent<Rigidbody2D>();
+
+						joint.enabled = true;
 						coll.isTrigger = false;
 						GrabbedBlock.layer = 0;
-						grabbedRB = GrabbedBlock.GetComponent<Rigidbody2D>();
 						grabbedRB.isKinematic = false;
+
+						if (block.IsNew) {
+							Vector2 dist =  hit.point - (Vector2)block.transform.position;
+							dist /= SpawnBlock.SpawnSize;
+							block.transform.position = hit.point - dist;
+							block.transform.localScale = block.GetComponent<Block>().OriginalScale;
+						}
+
 						joint.connectedBody = spawnedPrefab.GetComponent<Rigidbody2D>();
 						joint.anchor = GrabbedBlock.transform.InverseTransformPoint(spawnedPrefab.transform.position);
 					}
@@ -66,18 +69,23 @@ public class GrabBlock : MonoBehaviour
 
 		if (Input.GetMouseButtonUp (0) && !inSpawn) {
 			if (spawnedPrefab != null) {
-				usedBlocks++;
+				if (block.IsNew) {
+					usedBlocks++;
+					block.inPlay = true;
+					GrabbedBlock.tag = "Block";
+					SpawnBlock.instance.BlockSpawn ();
+				}
+
 				joint.enabled = false; // this fixing a major bug (I guess we won't need it anyway?)
-				block.interactable = false;
-				block.inPlay = true;
-				GrabbedBlock.tag = "Block";
+				//block.Interactive = false;
+				block.IsNew = false;
+
 				GrabbedBlock.transform.parent = null;
 				GrabbedBlock = null;
-				SpawnBlock.instance.BlockSpawn ();
 				Destroy (spawnedPrefab.gameObject);
 			}
 		} 
-		if (Input.GetMouseButtonUp (0) && inSpawn) {
+		if (Input.GetMouseButtonUp (0) && inSpawn && block.IsNew) {
 			GrabbedBlock.transform.localScale = Vector3.one;
 			GrabbedBlock.transform.localScale *= SpawnBlock.SpawnSize;
 

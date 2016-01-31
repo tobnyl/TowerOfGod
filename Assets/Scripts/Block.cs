@@ -12,7 +12,12 @@ public class Block : MonoBehaviour {
     public AudioClip StackClip;
 
 	// publics
-	public bool interactable = false;
+	public bool Interactive = false;
+	public bool IsNew = true;
+
+	// secret publics
+	[HideInInspector]
+	public Vector3 OriginalScale;
 
 
 	void OnEnable(){
@@ -21,18 +26,19 @@ public class Block : MonoBehaviour {
 	void OnDisable(){
 		AllBlocks.Remove (this);
 	}
+	void Awake(){
+		OriginalScale = transform.localScale;
+	}
 
     void OnCollisionEnter2D(Collision2D c)
     {
         var otherBlock = c.gameObject.GetComponent<Block>();
-        var otherRigidBody = c.gameObject.GetComponent<Rigidbody2D>();
-        var rigidBody = GetComponent<Rigidbody2D>();
        
         if (otherBlock != null) 
         {
 			// do add more sounds!
 
-            if (gameObject.tag == "Block" && otherBlock.tag == "Block" &&  c.relativeVelocity.magnitude > GameManager.Instance.DestroyBlockThreshold)
+            if (gameObject.tag == "Block" && otherBlock.tag == "Block" && (otherBlock.GetComponent<Rigidbody2D>().mass <= GetComponent<Rigidbody2D>().mass) &&  (GetComponent<Rigidbody2D>().velocity.magnitude * GetComponent<Rigidbody2D>().mass) > GameManager.Instance.DestroyBlockThreshold)
             {
                 var offsetIncrement = transform.lossyScale/2f;
                 var numExplosions = 3;
