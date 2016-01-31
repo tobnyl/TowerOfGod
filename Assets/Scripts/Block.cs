@@ -46,7 +46,7 @@ public class Block : MonoBehaviour {
                 var offset = Vector3.zero;
 
                 //AudioManager.Instance.AddAudioClipToQueue(ExplosionClip);
-                AudioManager.Instance.Play(ExplosionClip, 0.001f, 0.01f, 0.99f, 1.01f);
+                AudioManager.Instance.Play(ExplosionClip, 0.01f, 0.06f, 0.99f, 1.01f);
 
                 for (int i = 0; i < numExplosions; i++)
                 {                    
@@ -71,11 +71,10 @@ public class Block : MonoBehaviour {
 
     private void PlayStackSoundEffect(Collision2D c)
     {
-        var vol = Mathf.Max(0.05f, Mathf.Abs(c.relativeVelocity.normalized.y) / 15f);
-        Debug.Log(vol);
+        var vol = Mathf.Max(0.3f, Mathf.Abs(c.relativeVelocity.normalized.y) / 4f);
 
         //AudioManager.Instance.AddAudioClipToQueue(StackClip);
 
-        AudioManager.Instance.Play(StackClip, 0.01f, 0.05f, 1.0f, 1.0f);
+        AudioManager.Instance.Play(StackClip, vol, vol, 1.0f, 1.0f);
     }
 }
