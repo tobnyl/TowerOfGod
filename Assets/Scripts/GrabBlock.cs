@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class GrabBlock : MonoBehaviour 
 {
@@ -17,6 +18,7 @@ public class GrabBlock : MonoBehaviour
 	public bool inSpawn;
 	public int usedBlocks;
     public AudioClip GrabClip;
+    public AudioMixerGroup GrabMixer;
 
 	void FixedUpdate(){
 		if (Input.GetMouseButton(0))
@@ -54,7 +56,7 @@ public class GrabBlock : MonoBehaviour
 					    var pitch = 1.0f - hitRb.mass/20f;
                         Debug.Log("Rb: " + vol + " " + pitch);
 
-                        AudioManager.Instance.Play(GrabClip, vol, vol, pitch, pitch);
+                        AudioManager.Instance.Play(GrabClip, GrabMixer, vol, vol, pitch, pitch);
 
                         spawnedPrefab = Instantiate(mousePointPrefab, hit.point, Quaternion.identity) as GameObject;
 						GrabbedBlock = hit.transform.gameObject;

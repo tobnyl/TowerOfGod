@@ -105,7 +105,7 @@ public class TestMenu : MonoBehaviour {
 
 	public void MainLevel ()
 	{
-		Application.LoadLevel(1);
+		Application.LoadLevel("Tobias2");
 	}
 	
 
