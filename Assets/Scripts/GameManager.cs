@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 	public float HighestPoint = 0;
 	public float HighestX = 0;
 	public float LowestX = 0;
+	public float HighScore = 0;
 
     [Range(0.0f, 20f)]
     public float DestroyBlockThreshold;
