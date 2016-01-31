@@ -6,6 +6,8 @@ public class Block : MonoBehaviour {
 
 	// public statics
 	public static List<Block> AllBlocks = new List<Block>();
+
+	// publics
 	public bool inPlay;
 	public float SpawnAngle = 0;
     public GameObject ExplosionPrefab;
@@ -13,10 +15,9 @@ public class Block : MonoBehaviour {
     public AudioClip StackClip;
     public AudioMixerGroup ExplosionMixer;
     public AudioMixerGroup StackMixer;
-
-	// publics
 	public bool Interactive = false;
 	public bool IsNew = true;
+	public GameObject BreakParticles;
 
 	// secret publics
 	[HideInInspector]
@@ -50,6 +51,7 @@ public class Block : MonoBehaviour {
 
                 //AudioManager.Instance.AddAudioClipToQueue(ExplosionClip);
                 AudioManager.Instance.Play(ExplosionClip, ExplosionMixer, 0.01f, 0.06f, 0.99f, 1.01f);
+				Instantiate(BreakParticles, transform.position, Quaternion.identity);
 
                 for (int i = 0; i < numExplosions; i++)
                 {                    
